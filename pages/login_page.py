@@ -9,7 +9,7 @@ class LoginPage(BasePage):
     def should_be_login_url(self):
         login_url_substring = "login"
         login_url = self.browser.current_url
-        assert login_url_substring in login_url, "Incorrect login URL"
+        assert login_url_substring in login_url, f"Incorrect login URL: '{login_url_substring}' is not a substring of '{login_url}'"
 
     def should_be_login_form(self):
         assert self.is_element_present(*LoginPageLocators.LOGIN_FORM), "Login form is not found"
