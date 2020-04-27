@@ -19,7 +19,7 @@ class ProductPage(BasePage):
     def should_be_correct_product_name(self, product_name):
         alert_success = self.browser.find_element(*ProductPageLocators.PRODUCT_IN_BASKET_ALERT)
         alert_text = alert_success.text
-        assert product_name in alert_text, "Incorrect product name"
+        assert product_name == alert_text, "Incorrect product name"
 
     def should_be_correct_basket_price(self, product_price):
         basket_price = self.browser.find_element(*ProductPageLocators.BASKET_PRICE_ALERT)
