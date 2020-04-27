@@ -10,6 +10,8 @@ def test_guest_can_add_product_to_basket(browser, link_item):
     link = f"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{link_item}"
     product_page = ProductPage(browser, link)
     product_page.open()
+    product_page.should_not_be_seccess_message()
+
     product_page.add_product_to_basket()
     product_page.solve_quiz_and_get_code()
 
