@@ -14,3 +14,6 @@ class ProductPageLocators():
     PRODUCT_PRICE_LABEL = (By.CSS_SELECTOR, "p.price_color")
     BASKET_PRICE_ALERT = (By.CSS_SELECTOR, "div.alert-info div.alertinner p strong")
 
+class BasePageLocators():
+    LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_invalid")
