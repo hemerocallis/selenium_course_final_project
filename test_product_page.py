@@ -2,7 +2,33 @@ from .pages.product_page import ProductPage
 from .pages.login_page import LoginPage
 from .pages.basket_page import BasketPage
 import pytest
-import time
+
+# pytest -v --tb=line -m login_guest --language=en test_product_page.py
+@pytest.mark.login_guest
+class TestLoginFromProductPage():
+    # @pytest.fixture(scope="function", autouse=True)
+    # def setup(self):
+    #     self.product = ProductFactory(title = "Best book")
+    #     # create a new product via API
+    #     self.link = self.product.link
+    #     yield
+    #     # teardown steps
+    #     self.product.delete()
+
+    def test_guest_should_see_login_link_on_product_page(self, browser):
+        link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+        product_page = ProductPage(browser, link)
+        product_page.open()
+        product_page.should_be_login_link()
+
+    def test_guest_can_go_to_login_page_from_product_page(self, browser):
+        link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+        product_page = ProductPage(browser, link)
+        product_page.open()
+        product_page.go_to_login_page()
+        login_page = LoginPage(browser, browser.current_url)
+        login_page.should_be_login_page()
+
 
 @pytest.mark.skip(reason="\nblocked test")
 @pytest.mark.parametrize('link_item', ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"])
@@ -40,20 +66,6 @@ def test_message_disappeared_after_adding_product_to_basket(browser):
     product_page.open()
     product_page.add_product_to_basket()
     product_page.should_be_disappeared_success_message()
-
-def test_guest_should_see_login_link_on_product_page(browser):
-    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
-    product_page = ProductPage(browser, link)
-    product_page.open()
-    product_page.should_be_login_link()
-
-def test_guest_can_go_to_login_page_from_product_page(browser):
-    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
-    product_page = ProductPage(browser, link)
-    product_page.open()
-    product_page.go_to_login_page()
-    login_page = LoginPage(browser, browser.current_url)
-    login_page.should_be_login_page()
 
 def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
