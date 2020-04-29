@@ -12,6 +12,10 @@ class BasePage():
         self.url = url
         self.browser.implicitly_wait(timeout)
 
+    def go_to_basket_page(self):
+        basket_button = self.browser.find_element(*BasePageLocators.BASKET_BUTTON)
+        basket_button.click()
+
     def go_to_login_page(self):
         login_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK) # '*' is used to unpack tuple
         login_link.click()
