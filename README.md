@@ -35,4 +35,4 @@ pytest -v --tb=line --language=en test_main_page.py
 pytest -v --tb=line --language=en test_product_page.py
 pytest -v --tb=line -m login_guest --language=en test_product_page.py
 pytest -v --tb=line -m user_adds_to_basket --language=en test_product_page.py
- 
+```
