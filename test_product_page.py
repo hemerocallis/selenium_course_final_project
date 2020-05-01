@@ -5,7 +5,6 @@ from .pages.main_page import MainPage
 import pytest
 import time
 
-# pytest -v --tb=line -m login_guest --language=en test_product_page.py
 @pytest.mark.login_guest
 class TestLoginFromProductPage():
     def test_guest_should_see_login_link_on_product_page(self, browser):
