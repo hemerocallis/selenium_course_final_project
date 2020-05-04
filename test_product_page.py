@@ -24,15 +24,15 @@ class TestLoginFromProductPage():
 
 
 @pytest.mark.user_adds_to_basket
-class TestUserAddToBasketFromProductPage(object):
+class TestUserAddToBasketFromProductPage():
     @pytest.fixture(scope="function", autouse=True)
     def setup(self, browser):
-        self.login_link = "http://selenium1py.pythonanywhere.com/en-gb/accounts/login/"
-        login_page = LoginPage(browser, self.login_link)
+        login_link = "http://selenium1py.pythonanywhere.com/en-gb/accounts/login/"
+        login_page = LoginPage(browser, login_link)
         login_page.open()
-        self.email = str(time.time()) + "@fakemail.info"
-        self.password = "Qwerrrty1!"
-        login_page.register_new_user(self.email, self.password)
+        email = str(time.time()) + "@fakemail.info"
+        password = "Qwerrrty1!"
+        login_page.register_new_user(email, password)
         main_page = MainPage(browser, browser.current_url)
         main_page.should_be_authorized_user()
 
@@ -59,8 +59,7 @@ class TestUserAddToBasketFromProductPage(object):
 
 
 @pytest.mark.need_review
-@pytest.mark.xfail(reason="bug fixing is in progress")
-@pytest.mark.parametrize('link_item', ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"])
+@pytest.mark.parametrize('link_item', ["0", "1", "2", "3", "4", "5", "6", pytest.param("7", marks=pytest.mark.xfail(reason="bug fixing is in progress")), "8", "9"])
 def test_guest_can_add_product_to_basket(browser, link_item):
     link = f"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{link_item}"
     product_page = ProductPage(browser, link)
@@ -69,6 +68,7 @@ def test_guest_can_add_product_to_basket(browser, link_item):
     product_page.add_product_to_basket()
     product_page.solve_quiz_and_get_code()
 
+    product_page.should_be_success_alert()
     product_name = product_page.get_product_name()
     product_page.should_be_correct_product_name(product_name)
 

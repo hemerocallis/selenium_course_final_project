@@ -2,7 +2,7 @@
 Final project of the course at Stepik platform: [Автоматизация тестирования с помощью Selenium и Python](https://stepik.org/course/575/syllabus)
 
 
-Autotests implemented in frame of the project (using [Training site](http://selenium1py.pythonanywhere.com/)) are based on Page Object pattern. 
+Autotests implemented in frame of the project (using [Training site](http://selenium1py.pythonanywhere.com/)) are based on Page Object pattern.
 
 
 
@@ -16,7 +16,7 @@ selenium==3.14.0
 ```
 git clone https://github.com/hemerocallis/selenium_course_final_project.git
 cd selenium_course_final_project
-pip install -r requirements.txt 
+pip install -r requirements.txt
 ```
 
 ## Running the tests
@@ -34,5 +34,6 @@ Additionally the project includes autotests of two different pages for guests an
 pytest -v --tb=line --language=en test_main_page.py
 pytest -v --tb=line --language=en test_product_page.py
 pytest -v --tb=line -m login_guest --language=en test_product_page.py
+pytest -v --tb=line -m login_guest --language=en --browser_name=firefox test_product_page.py
 pytest -v --tb=line -m user_adds_to_basket --language=en test_product_page.py
 ```
